@@ -39,39 +39,21 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
                 case ActivityTypes.ConversationUpdate:
                     var client = new ConnectorClient(new Uri(activity.ServiceUrl));
                     IConversationUpdateActivity update = activity;
-                    //if (update.MembersAdded.Any())
-                    //{
-                    //    var reply = activity.CreateReply();
-                    //    var newMembers = update.MembersAdded?.Where(t => t.Id != activity.Recipient.Id);
-                    //    foreach (var newMember in newMembers)
-                    //    {
-                    //        reply.Text = "Welcome User";
-                    //        if (!string.IsNullOrEmpty(newMember.Name))
-                    //        {
-                    //            reply.Text += $" {newMember.Name}";
-                    //        }
-                    //        reply.Text += "!";
-                    //        await client.Conversations.ReplyToActivityAsync(reply);
-                    //    }
-
-                        
-                    //}
-
-                    var reply1 = activity.CreateReply("I have colors in mind, but need your help to choose the best one.");
-                    reply1.Type = ActivityTypes.Message;
-                    reply1.TextFormat = TextFormatTypes.Plain;
-
-                    reply1.SuggestedActions = new SuggestedActions()
+                    if (update.MembersAdded.Any())
                     {
-                        Actions = new List<CardAction>()
+                        var reply = activity.CreateReply();
+                        var newMembers = update.MembersAdded?.Where(t => t.Id != activity.Recipient.Id);
+                        foreach (var newMember in newMembers)
+                        {
+                            reply.Text = "Welcome User";
+                            if (!string.IsNullOrEmpty(newMember.Name))
                             {
-                                new CardAction(){ Title = "Blue", Type=ActionTypes.ImBack, Value="Blue" },
-                                new CardAction(){ Title = "Red", Type=ActionTypes.ImBack, Value="Red" },
-                                new CardAction(){ Title = "Green", Type=ActionTypes.ImBack, Value="Green" }
+                                reply.Text += $" {newMember.Name}";
                             }
-                    };
-
-                    await client.Conversations.ReplyToActivityAsync(reply1);
+                            reply.Text += "!";
+                            await client.Conversations.ReplyToActivityAsync(reply);
+                        }
+                    }
                     break;
                 case ActivityTypes.ContactRelationUpdate:
                 case ActivityTypes.Typing:
