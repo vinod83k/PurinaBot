@@ -28,16 +28,16 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
             return BotAuthenticator.GenerateUnauthorizedResponse(req);
         }
 
-        var anotherReply = activity.CreateReply("I have colors in mind, but need your help to choose the best one.");
-        anotherReply.Type = ActivityTypes.Message;
-        anotherReply.TextFormat = TextFormatTypes.Plain;
+        // var anotherReply = activity.CreateReply("I have colors in mind, but need your help to choose the best one.");
+        // anotherReply.Type = ActivityTypes.Message;
+        // anotherReply.TextFormat = TextFormatTypes.Plain;
 
-        anotherReply.SuggestedActions = new SuggestedActions{
-            Actions = new List<CardAction>{
-                new CardAction(){ Title = "Blue", Type=ActionTypes.ImBack, Value="Blue" },
-                new CardAction(){ Title = "Red", Type=ActionTypes.ImBack, Value="Red" }        
-            }
-        };
+        // anotherReply.SuggestedActions = new SuggestedActions{
+        //     Actions = new List<CardAction>{
+        //         new CardAction(){ Title = "Blue", Type=ActionTypes.ImBack, Value="Blue" },
+        //         new CardAction(){ Title = "Red", Type=ActionTypes.ImBack, Value="Red" }        
+        //     }
+        // };
 
         if (activity != null)
         {
