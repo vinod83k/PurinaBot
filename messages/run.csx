@@ -53,6 +53,8 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
                             reply.Text += "!";
                             await client.Conversations.ReplyToActivityAsync(reply);
                         }
+
+                        
                     }
                     break;
                 case ActivityTypes.ContactRelationUpdate:
