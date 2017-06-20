@@ -54,7 +54,21 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
                             await client.Conversations.ReplyToActivityAsync(reply);
                         }
 
-                        
+                        var reply1 = activity.CreateReply("I have colors in mind, but need your help to choose the best one.");
+                        reply1.Type = ActivityTypes.Message;
+                        reply1.TextFormat = TextFormatTypes.Plain;
+
+                        reply1.SuggestedActions = new SuggestedActions()
+                        {
+                            Actions = new List<CardAction>()
+                            {
+                                new CardAction(){ Title = "Blue", Type=ActionTypes.ImBack, Value="Blue" },
+                                new CardAction(){ Title = "Red", Type=ActionTypes.ImBack, Value="Red" },
+                                new CardAction(){ Title = "Green", Type=ActionTypes.ImBack, Value="Green" }
+                            }
+                        };
+
+                        await client.Conversations.ReplyToActivityAsync(reply1);
                     }
                     break;
                 case ActivityTypes.ContactRelationUpdate:
