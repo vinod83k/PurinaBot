@@ -14,11 +14,11 @@ public class BasicQnAMakerDialog : QnAMakerDialog<object>
     {
     }
 
-    public override async Task NoMatchHandler(IDialogContext context, string originalQueryText)
-    {
-        await context.PostAsync($"Sorry, I couldn't find an answer for '{originalQueryText}'.");
-        context.Wait(MessageReceived);
-    }
+    //public override async Task NoMatchHandler(IDialogContext context, string originalQueryText)
+    //{
+    //    await context.PostAsync($"Sorry, I couldn't find an answer for '{originalQueryText}'.");
+    //    context.Wait(MessageReceived);
+    //}
 
     //[QnAMakerResponseHandler(50)]
     //public async Task LowScoreHandler(IDialogContext context, string originalQueryText, QnAMakerResult result)
