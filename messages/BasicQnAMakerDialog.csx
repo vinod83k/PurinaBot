@@ -13,4 +13,10 @@ public class BasicQnAMakerDialog : QnAMakerDialog
     public BasicQnAMakerDialog() : base(new QnAMakerService(new QnAMakerAttribute(Utils.GetAppSetting("QnASubscriptionKey"), Utils.GetAppSetting("QnAKnowledgebaseId"))))
     {
     }
+
+    public override async Task NoMatchHandler(IDialogContext context, string originalQueryText)
+    {
+        await context.PostAsync($"Sorry, I couldn't find an answer for '{originalQueryText}'.");
+        context.Wait(MessageReceived);
+    }
 }
