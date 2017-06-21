@@ -14,9 +14,9 @@ public class BasicQnAMakerDialog : QnAMakerDialog
     {
     }
 
-    // public override async Task NoMatchHandler(IDialogContext context, string originalQueryText)
-    // {
-    //     await context.PostAsync($"Sorry, I couldn't find an answer for '{originalQueryText}'.");
-    //     context.Wait(MessageReceived);
-    // }
+    public override async Task NoMatchHandler(IDialogContext context, string originalQueryText)
+    {
+        await context.PostAsync($"Sorry, I couldn't find an answer for '{originalQueryText}'.");
+        context.Wait(MessageReceived);
+    }
 }
